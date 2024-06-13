@@ -18,7 +18,6 @@
 #include "psapi.h"
 #include <stdio.h>
 #include <tchar.h>
-#include "cdll.h"
 #include <windows.h>
 #include <Psapi.h>
 #include <sddl.h>
@@ -2590,7 +2589,7 @@ namespace C
 			_tprintf(TEXT("\n  WARNING: %s failed with error %d (%s)"), msg, eNum, sysMsg);
 		}
 
-
+#ifdef __USE_CDLL_
 		bool FillModuleListTH32(C::Process::TModules& modules, DWORD pid)
 		{
 			// CreateToolhelp32Snapshot()
@@ -2764,6 +2763,7 @@ namespace C
 
 			return false;
 		}
+#endif //__USE_CDLL_
 
 	}
 

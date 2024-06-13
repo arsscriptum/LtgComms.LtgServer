@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(SourcesDirectory)cdll.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="$(SourcesDirectory)cmdline.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -22,11 +19,11 @@
     <ClCompile Include="$(SourcesDirectory)win32.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="$(SourcesDirectory)blocking_queue.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(SourcesDirectory)cdll.h">
-      <Filter>headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(SourcesDirectory)cmdline.h">
       <Filter>headers</Filter>
     </ClInclude>
@@ -46,6 +43,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SourcesDirectory)win32.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourcesDirectory)blocking_queue.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

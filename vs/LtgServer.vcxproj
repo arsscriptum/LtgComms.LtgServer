@@ -50,27 +50,26 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />  <PropertyGroup Label="TargetNameConfig">
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="TargetNameConfig">
     <TargetName>LtgServer$(ConfigurationPlaceHolder)</TargetName>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
-
   <ItemGroup>
     <ClCompile Include="$(SourcesDirectory)main.cpp" />
     <ClCompile Include="$(SourcesDirectory)stdafx.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="$(SourcesDirectory)cdll.cpp" />
     <ClCompile Include="$(SourcesDirectory)cmdline.cpp" />
     <ClCompile Include="$(SourcesDirectory)init.cpp" />
     <ClCompile Include="$(SourcesDirectory)log.cpp" />
     <ClCompile Include="$(SourcesDirectory)win32.cpp" />
+    <ClCompile Include="$(SourcesDirectory)blocking_queue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(SourcesDirectory)resources.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(SourcesDirectory)cdll.h" />
     <ClInclude Include="$(SourcesDirectory)cmdline.h" />
     <ClInclude Include="$(SourcesDirectory)log.h" />
     <ClInclude Include="$(SourcesDirectory)macros.h" />
@@ -78,6 +77,7 @@
     <ClInclude Include="$(SourcesDirectory)stdafx.h" />
     <ClInclude Include="$(SourcesDirectory)targetver.h" />
     <ClInclude Include="$(SourcesDirectory)win32.h" />
+    <ClInclude Include="$(SourcesDirectory)blocking_queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -91,10 +91,17 @@
     </ItemGroup>
     <Delete Files="@(_CustomFilesToDelete)" />
   </Target>
-  <Target Name="InitializeBuildInformation" BeforeTargets="InitializeBuildStatus">
-    <Message Text="==============================================================================" Importance="high" />
-    <Message Text="InitializeBuildInformation" Importance="high" />
-    <Message Text="==============================================================================" Importance="high" />
+  <Target Name="PrintBuildConfig" BeforeTargets="InitializeBuildStatus">
+    <Message Text="==========================================================" Importance="high" />
+    <Message Text="                PrintBuildConfig                                     " Importance="high" />
+    <Message Text="CharacterSet.....................: $(CharacterSet)" Importance="high" />
+    <Message Text="UseDebugLibraries................: $(UseDebugLibraries)" Importance="high" />
+    <Message Text="SubSystem........................: $(SubSystem)" Importance="high" />
+    <Message Text="IntDir...........................: $(IntDir)" Importance="high" />  
+    <Message Text="OutDir...........................: $(OutDir)" Importance="high" />
+    <Message Text="DebugInformationFormat...........: $(DebugInformationFormat)" Importance="high" />
+    <Message Text="MinimalRebuild...................: $(MinimalCompilationSetting)" Importance="high" />
+    <Message Text="==========================================================" Importance="high" />
   </Target>
   <ItemGroup Condition="'$(UsingQt5)' == '1'">
     <QtRcc Include="$(AppResourceFile)">
