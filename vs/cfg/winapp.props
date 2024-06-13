@@ -5,15 +5,27 @@
   <!-- General Environment values -->
   <PropertyGroup Label="ServiceMacros">
      <ProjectRoot>$(ProjectDir)..\</ProjectRoot>
-     <TempRoot>$(ProjectDir)</TempRoot>
-     <UsingQt5>0</UsingQt5>
-     <UsingWinsock>0</UsingWinsock>
-     <UsingOpenSSL>0</UsingOpenSSL>
-     <UsingJSMNLib>0</UsingJSMNLib>
-     <UsingHTTPLib>0</UsingHTTPLib>
+     <TemporaryBuildFilesRootDirectory>$(ProjectDir)obj\</TemporaryBuildFilesRootDirectory>
+     <ExternalDirectory>$(SolutionRootDirectory)external\</ExternalDirectory>
      <SolutionRootDirectory>$(ProjectDir)..\</SolutionRootDirectory>
-     <ExternalDirectory>$(SolutionRootDirectory)\external</ExternalDirectory>
+     <ExternalDirectory>$(SolutionRootDirectory)external\</ExternalDirectory>
+     <ScriptsDirectory>$(SolutionRootDirectory)scripts\</ScriptsDirectory>
+     <BinariesDirectory>$(SolutionRootDirectory)bin\</BinariesDirectory>
+     <SourcesDirectory>$(SolutionRootDirectory)src\</SourcesDirectory>
+     <ResourcesDirectory>$(SolutionRootDirectory)resources\</ResourcesDirectory>
+     <ProjectsFilesDirectory>$(SolutionRootDirectory)vs\</ProjectsFilesDirectory>
+     <AppResourceFile>$(TemporaryBuildFilesRootDirectory)app_resource.qrc</AppResourceFile>
   </PropertyGroup> 
+
+  <!-- General Environment values -->
+  <PropertyGroup Label="IncludedExternalsConfig">
+    <UsingQt5>0</UsingQt5>
+    <UsingWinsock>0</UsingWinsock>
+    <UsingOpenSSL>0</UsingOpenSSL>
+    <UsingJSMNLib>0</UsingJSMNLib>
+    <UsingHTTPLib>0</UsingHTTPLib>
+  </PropertyGroup> 
+
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <CharacterSet>NotSet</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>    
@@ -26,18 +38,52 @@
     <CharacterSet>NotSet</CharacterSet>
     <UseDebugLibraries>false</UseDebugLibraries>    
   </PropertyGroup> 
-  <PropertyGroup Label="ModuleMacros">
-    <ProjectOutputDirectory>$(SolutionRootDirectory)bin\$(Platform)\$(Configuration)</ProjectOutputDirectory>
-    <ProjectObjectDirectory>$(TempRoot)___temp_compilation_files\obj\$(TargetName)\$(Platform)\$(Configuration)</ProjectObjectDirectory>
-    <AppResourceFile>$(ProjectObjectDirectory)\app_resource.qrc</AppResourceFile>
-  </PropertyGroup>
+  
   <PropertyGroup Label="GeneralConfig">
-    <OutDir>$(ProjectOutputDirectory)\</OutDir>
-    <IntDir>$(ProjectObjectDirectory)\</IntDir>
+    <OutDir>$(BinariesDirectory)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(TemporaryBuildFilesRootDirectory)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
+
   <PropertyGroup Label="WinsockConfig" Condition="'$(UsingWinsock)'=='1'">
     <WinsockLib>wsock32.lib</WinsockLib>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)'=='x86' Or '$(Platform)'=='Win32'" Label="SpecialConfiguration">
+     <AbrevPlatform>32</AbrevPlatform>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64' Or '$(Platform)'=='Win64'" Label="SpecialConfiguration">
+     <AbrevPlatform>64</AbrevPlatform>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="SpecialConfiguration">
+     <AbrevConfig>d</AbrevConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="SpecialConfiguration">
+     <AbrevConfig>r</AbrevConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='DebugDll'" Label="SpecialConfiguration">
+     <AbrevConfig>d_dll</AbrevConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='ReleaseDll'" Label="SpecialConfiguration">
+     <AbrevConfig>r_dll</AbrevConfig>
+  </PropertyGroup>
+  <PropertyGroup Label="ConfigurationPlaceHolder">
+    <ConfigurationPlaceHolder>$(AbrevPlatform)$(AbrevConfig)</ConfigurationPlaceHolder>
+  </PropertyGroup>
+
+
+  <!-- MinimalCompilation setting: Iterative Compilation -->
+  <Choose>
+    <When Condition="'$(SetMinimalCompilation)'==''">
+      <PropertyGroup Label="MinimalCompilation">
+        <MinimalCompilationSetting>true</MinimalCompilationSetting>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup Label="MinimalCompilation">
+        <MinimalCompilationSetting>$(SetMinimalCompilation)</MinimalCompilationSetting>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
 
 
   <PropertyGroup Label="OpenSSLConfig" Condition="'$(UsingOpenSSL)'=='1'">
@@ -61,7 +107,6 @@
     <HTTPLIB_RootDirectory>$(ExternalDirectory)\cpp-httplib</HTTPLIB_RootDirectory>
     <HTTPLib_Defines>USING_HTTPLIB</HTTPLib_Defines>
   </PropertyGroup>
-
 
 
   <ItemDefinitionGroup>
@@ -96,6 +141,7 @@
     </QtRcc>
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <MinimalRebuild>$(MinimalCompilationSetting)</MinimalRebuild>
       <AdditionalIncludeDirectories>$(OpenSSL_Include_Directory);$(HTTPLIB_RootDirectory);$(JSMNLIB_RootDirectory);$(ProjectRoot)src;$(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>$(JSMN_Defines);$(HTTPLib_Defines);$(OpenSSL_Defines);CCC_STATIC_LINKING;_CRT_SECURE_NO_WARNINGS;CC_WINAPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
