@@ -83,11 +83,14 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <Target Name="CustomClean" BeforeTargets="BeforeBuild">
+  <Target Name="CustomClean" BeforeTargets="Clean">
     <Message Text="Custom Clean" Importance="high" />
     <ItemGroup>
       <_CustomFilesToDelete Include="$(OutDir)*" />
     </ItemGroup>
+     <Message Text="===================================================" />
+     <Message Text="CUSTOM CLEAN - DELETING $(OutDir)*" />
+     <Message Text="===================================================" />
     <Delete Files="@(_CustomFilesToDelete)" />
   </Target>
   <ItemGroup Condition="'$(UsingQt5)' == '1'">

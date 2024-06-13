@@ -58,7 +58,7 @@ goto :init
     echo.      target platform      one of 'x86', 'x64', 'clean'
     echo.      build config         one of 'Debug', 'Release'
     echo.      /r, /rebuild         sets the minimal rebuild (/Gm) compiler option to false, forcing a rebuild
-    echo.      /v                   verbose mode 
+    echo.      /v, /verbose         verbose mode 
     echo.
     goto :eof
 
@@ -70,20 +70,19 @@ goto :init
 
     
     if /i "%~1"=="/v"         call :setverbosemode  & shift & goto :parsecmdline
-    if /i "%~1"=="-v"         call :setverbosemode  & shift & goto :parsecmdline
-    if /i "%~1"=="--verbose"  call :setverbosemode  & shift & goto :parsecmdline
-
+    if /i "%~1"=="/verbose"   call :setverbosemode  & shift & goto :parsecmdline
+    
     if /i "%~1"=="/r"         call :setrebuild  & shift & goto :parsecmdline
     if /i "%~1"=="/rebuild"   call :setrebuild  & shift & goto :parsecmdline
-    if /i "%~1"=="-r"         call :setrebuild  & shift & goto :parsecmdline
-    if /i "%~1"=="--rebuild"  call :setrebuild  & shift & goto :parsecmdline
-
+    
     shift
     goto :parsecmdline
 
 
 
 :setrebuild
+    set "__rebuild_mode=yes"
+    set "__rebuild_option=/r"
     set SetMinimalCompilation=false>nul
     goto :eof
 
@@ -96,13 +95,22 @@ goto :init
 
 :settarget
     set tmpval=%1
-    set "__target=%tmpval%"
+    if not x%tmpval:/=%==x%tmpval% ( 
+        call :printverbose "[settarget] %tmpval% is not a target"
+    ) else (
+        set "__target=%tmpval%"
+    )
+    
     goto :eof
 
 
 :setbuildcfg
     set tmpval=%1
-    set "__buildcfg=%tmpval%"
+    if not x%tmpval:/=%==x%tmpval% ( 
+        call :printverbose "[setbuildcfg] %tmpval% is not a config"
+    ) else (
+        set "__buildcfg=%tmpval%"
+    )    
     goto :eof
 
 
@@ -159,6 +167,12 @@ goto :init
 :call_make_build
     set config=%1
     set platform=%2
+
+    if /i "%__rebuild_mode%"=="yes" (
+        call %__lib_out% :__out_n_d_cya "[rebuild] "
+        call %__lib_out% :__out_l_gry "BUILDING WITH MINIMAL REBUILD (Gm) set to FALSE"
+    )
+
     call %__lib_date% :getbuilddate
     call %__lib_out% :__out_l_blu "=============================================================================="
     call %__lib_out% :__out_l_cya "build start - %__cfg_file% - %config% - %platform%"
@@ -242,7 +256,8 @@ goto :init
     call :printverbose "start build"
 
     if "%__target%" == "" (
-        call :error_missing_target  & goto :eof
+        call :warning_missing_target
+        call :build_x64 Debug
         )else (
         if "%__target%" == "clean" (
             call :clean
@@ -279,6 +294,16 @@ goto :init
     echo.
     call %__lib_out% :__out_n_d_red "Error"
     call %__lib_out% :__out_d_yel " Missing target. try 'x86', 'x64' or 'clean'"
+    echo.
+    goto :eof
+
+:warning_missing_target
+    echo.
+    call :header 
+    call :usage 
+    echo.
+    call %__lib_out% :__out_n_d_yel "[Warning]"
+    call %__lib_out% :__out_d_cya " build target / configuration not specified - Build Debug x64"
     echo.
     goto :eof
 

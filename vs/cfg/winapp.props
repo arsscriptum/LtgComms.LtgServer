@@ -75,7 +75,7 @@
   <Choose>
     <When Condition="'$(SetMinimalCompilation)'==''">
       <PropertyGroup Label="MinimalCompilation">
-        <MinimalCompilationSetting>true</MinimalCompilationSetting>
+        <MinimalCompilationSetting>false</MinimalCompilationSetting>
       </PropertyGroup>
     </When>
     <Otherwise>
