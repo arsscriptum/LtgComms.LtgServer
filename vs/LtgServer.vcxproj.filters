@@ -1,80 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\src\cmdline.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="$(SourcesDirectory)cdll.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\init.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="$(SourcesDirectory)cmdline.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\log.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="$(SourcesDirectory)init.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectRoot)src\main.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="$(SourcesDirectory)log.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="$(ProjectRoot)src\stdafx.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="$(SourcesDirectory)main.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\win32.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="$(SourcesDirectory)stdafx.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\cdll.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="$(SourcesDirectory)win32.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\cmdline.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="$(SourcesDirectory)cdll.h">
+      <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\log.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="$(SourcesDirectory)cmdline.h">
+      <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\macros.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="$(SourcesDirectory)log.h">
+      <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\nowarns.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="$(SourcesDirectory)macros.h">
+      <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\stdafx.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="$(SourcesDirectory)nowarns.h">
+      <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\targetver.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="$(SourcesDirectory)stdafx.h">
+      <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\win32.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="$(SourcesDirectory)targetver.h">
+      <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\cdll.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\httplib\httplib.h">
-      <Filter>HttpLib</Filter>
+    <ClInclude Include="$(SourcesDirectory)win32.h">
+      <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{f272d722-9117-44be-839d-fb50076c6915}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{c194587a-53ea-4b16-8301-7def144385b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers">
-      <UniqueIdentifier>{f2b34c0b-03d3-44ba-bb29-57f7325d0d4b}</UniqueIdentifier>
+    <Filter Include="headers">
+      <UniqueIdentifier>{a22d15c5-c5df-47de-aaff-a9bfaf9fd707}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{eac875e7-a5c2-4949-bb0a-c9b5f6e828ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HttpLib">
-      <UniqueIdentifier>{9a45de50-e6fd-40f8-ad8e-6d2ed7c40194}</UniqueIdentifier>
+    <Filter Include="resources">
+      <UniqueIdentifier>{951b25ff-df5f-4992-87a5-300fc946f4e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="$(ProjectRoot)src\resources.rc">
-      <Filter>Resources</Filter>
+    <ResourceCompile Include="$(SourcesDirectory)resources.rc">
+      <Filter>resources</Filter>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\src\httplib\README.md">
-      <Filter>HttpLib</Filter>
-    </None>
-  </ItemGroup>
 </Project>
-

@@ -75,7 +75,7 @@
   <Choose>
     <When Condition="'$(SetMinimalCompilation)'==''">
       <PropertyGroup Label="MinimalCompilation">
-        <MinimalCompilationSetting>false</MinimalCompilationSetting>
+        <MinimalCompilationSetting>true</MinimalCompilationSetting>
       </PropertyGroup>
     </When>
     <Otherwise>
@@ -182,20 +182,20 @@
   </ItemDefinitionGroup>  
  
 
-  <Target Name="PrintBuildConfig" BeforeTargets="InitializeBuildStatus">
-    <Message Text="================================================================================================" />
-    <Message Text="    *** application props ***   " />
-    <Message Text="CharacterSet: $(CharacterSet)." />
-    <Message Text="UseDebugLibraries: $(UseDebugLibraries)." />
-    <Message Text="Optimization: $(Optimization)." />
-    <Message Text="PreprocessorDefinitions: $(PreprocessorDefinitions)." />            
-    <Message Text="AdditionalDependencies: $(AdditionalDependencies)." />
-    <Message Text=" ***** QT ***** UsingQt5: $(UsingQt5)." />
-    <Message Text="Optimization: $(Optimization)." />
-    <Message Text="OptimizeReferences: $(OptimizeReferences)." />
-    <Message Text="IntrinsicFunctions: $(IntrinsicFunctions)." />
-    <Message Text="FunctionLevelLinking: $(FunctionLevelLinking)." />
-    <Message Text="================================================================================================" />
+  <Target Name="PrintBuildConfig" BeforeTargets="Build">
+    <Message Text="================================================================================================" Importance="high" />
+    <Message Text="    *** application props ***   " Importance="high" />
+    <Message Text="CharacterSet: $(CharacterSet)." Importance="high" />
+    <Message Text="UseDebugLibraries: $(UseDebugLibraries)." Importance="high" />
+    <Message Text="Optimization: $(Optimization)." Importance="high" />
+    <Message Text="PreprocessorDefinitions: $(PreprocessorDefinitions)." Importance="high" />  
+    <Message Text="AdditionalDependencies: $(AdditionalDependencies)." Importance="high" />
+    <Message Text=" ***** QT ***** UsingQt5: $(UsingQt5)." Importance="high" />
+    <Message Text="Optimization: $(Optimization)." Importance="high" />
+    <Message Text="OptimizeReferences: $(OptimizeReferences)." Importance="high" />
+    <Message Text="IntrinsicFunctions: $(IntrinsicFunctions)." Importance="high" />
+    <Message Text="FunctionLevelLinking: $(FunctionLevelLinking)." Importance="high" />
+    <Message Text="================================================================================================" Importance="high" />
   </Target>
 </Project>
 

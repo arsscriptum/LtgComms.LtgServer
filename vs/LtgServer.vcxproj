@@ -50,8 +50,7 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Label="TargetNameConfig">
+  <PropertyGroup Label="UserMacros" />  <PropertyGroup Label="TargetNameConfig">
     <TargetName>LtgServer$(ConfigurationPlaceHolder)</TargetName>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
@@ -84,14 +83,18 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <Target Name="CustomClean" BeforeTargets="Clean">
-    <Message Text="Custom Clean" Importance="high" />
+    <Message Text="==============================================================================" Importance="high" />
+    <Message Text="CUSTOM CLEAN - DELETING $(OutDir)*" Importance="high" />
+    <Message Text="==============================================================================" Importance="high" />
     <ItemGroup>
       <_CustomFilesToDelete Include="$(OutDir)*" />
     </ItemGroup>
-     <Message Text="===================================================" />
-     <Message Text="CUSTOM CLEAN - DELETING $(OutDir)*" />
-     <Message Text="===================================================" />
     <Delete Files="@(_CustomFilesToDelete)" />
+  </Target>
+  <Target Name="InitializeBuildInformation" BeforeTargets="InitializeBuildStatus">
+    <Message Text="==============================================================================" Importance="high" />
+    <Message Text="InitializeBuildInformation" Importance="high" />
+    <Message Text="==============================================================================" Importance="high" />
   </Target>
   <ItemGroup Condition="'$(UsingQt5)' == '1'">
     <QtRcc Include="$(AppResourceFile)">
@@ -99,4 +102,3 @@
     </QtRcc>
   </ItemGroup>
 </Project>
-
