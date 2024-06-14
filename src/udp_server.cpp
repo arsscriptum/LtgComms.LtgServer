@@ -53,30 +53,32 @@ unsigned long LtgUdpServer::Process(void* parameter)
 			perror("Receive failed");
 			continue;
 		}
-        printf("received data\n");
+        printf("[*] received data (%d bytes). ", n);
 		// Add received data to the FIFO queue
 		dataBuffer.insert(dataBuffer.end(), buffer, buffer + n);
 
 		while (true) {
 			Packet packet;
-            printf("try to parse data...\n");
+            printf("attempt to parse...");
 			if (parsePacket(packet)) {
-                printf("Success in parsing data!\n");
-				std::cout << "Received valid packet:\n";
-				std::cout << "Start Byte: " << static_cast<int>(packet.startByte) << "\n";
-				std::cout << "Event ID: " << static_cast<int>(packet.eventId) << "\n";
-				std::cout << "Length: " << static_cast<int>(packet.length) << "\n";
-				std::cout << "Data: ";
+                printf(" detected valid packet!\n");
+                printf("  [*] magic byte    :  %d\n", static_cast<int>(packet.startByte));
+                printf("  [*] function code :  %d\n", static_cast<int>(packet.eventId));
+                printf("  [*] data length   :  %d\n", static_cast<int>(packet.length));
+                printf("  [*] data values   :  ");
+
 				for (int i = 0; i < packet.length; ++i) {
-					std::cout << std::hex << static_cast<int>(packet.data[i]) << " ";
+                    printf("%02x ", static_cast<int>(packet.data[i]));
+					
 				}
-				std::cout << std::dec << "\nChecksum: " << static_cast<int>(packet.checksum) << "\n";
+                printf("\n");
+                printf("  [*] checksum     :  %d\n", static_cast<int>(packet.checksum));
 
 				// Remove parsed packet data from the buffer
 				removeParsedData(packet.length + 4);
 			}
 			else {
-                printf("Incomplete data,wait for more...\n");
+                printf("incomplete.\n");
 				break; // Not enough data to parse a packet
 			}
 		}
