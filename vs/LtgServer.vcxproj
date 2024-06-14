@@ -65,6 +65,10 @@
     <ClCompile Include="$(SourcesDirectory)log.cpp" />
     <ClCompile Include="$(SourcesDirectory)win32.cpp" />
     <ClCompile Include="$(SourcesDirectory)blocking_queue.cpp" />
+    <ClCompile Include="$(SourcesDirectory)udp_server.cpp" />
+    <ClCompile Include="$(SourcesDirectory)test.cpp" />
+    <ClCompile Include="$(SourcesDirectory)cthread.cpp" />
+    <ClCompile Include="$(SourcesDirectory)critsec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(SourcesDirectory)resources.rc" />
@@ -78,6 +82,11 @@
     <ClInclude Include="$(SourcesDirectory)targetver.h" />
     <ClInclude Include="$(SourcesDirectory)win32.h" />
     <ClInclude Include="$(SourcesDirectory)blocking_queue.h" />
+    <ClInclude Include="$(SourcesDirectory)udp_server.h" />
+    <ClInclude Include="$(SourcesDirectory)test.h" />
+    <ClInclude Include="$(SourcesDirectory)critsec.h" />
+    <ClInclude Include="$(SourcesDirectory)lock_guard.h" />
+    <ClInclude Include="$(SourcesDirectory)cthread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -99,7 +108,7 @@
     <Message Text="SubSystem........................: $(SubSystem)" Importance="high" />
     <Message Text="IntDir...........................: $(IntDir)" Importance="high" />  
     <Message Text="OutDir...........................: $(OutDir)" Importance="high" />
-    <Message Text="DebugInformationFormat...........: $(DebugInformationFormat)" Importance="high" />
+    <Message Text="TargetName.......................: $(TargetName)" Importance="high" />
     <Message Text="MinimalRebuild...................: $(MinimalCompilationSetting)" Importance="high" />
     <Message Text="==========================================================" Importance="high" />
   </Target>

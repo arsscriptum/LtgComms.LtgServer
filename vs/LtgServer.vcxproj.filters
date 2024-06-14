@@ -22,6 +22,18 @@
     <ClCompile Include="$(SourcesDirectory)blocking_queue.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="$(SourcesDirectory)test.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourcesDirectory)udp_server.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourcesDirectory)critsec.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SourcesDirectory)cthread.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(SourcesDirectory)cmdline.h">
@@ -46,6 +58,21 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SourcesDirectory)blocking_queue.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourcesDirectory)test.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourcesDirectory)udp_server.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourcesDirectory)critsec.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourcesDirectory)cthread.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SourcesDirectory)lock_guard.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

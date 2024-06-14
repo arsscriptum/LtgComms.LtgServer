@@ -14,8 +14,8 @@
 #include "cmdline.h"
 #include "Shlwapi.h"
 #include "log.h"
+#include "udp_server.h"
 #include "blocking_queue.h"
-
 #include <codecvt>
 #include <locale>
 #include <vector>
@@ -32,8 +32,18 @@
 
 using namespace std;
 
+
+
+#pragma comment(lib, "ws2_32.lib")
+
+constexpr int PORT = 12345;
+constexpr int BUFFER_SIZE = 256;
+
+
+
 #pragma message( "Compiling " __FILE__ )
 #pragma message( "Last modified on " __TIMESTAMP__ )
+
 
 void banner();
 void usage();
@@ -78,45 +88,22 @@ int main(int argc, TCHAR** argv, TCHAR envp)
 		return 0;
 	}
 
-	
+	LtgUdpServer server;
+
+	if (server.init()) 
+	{
+		server.CreateThread();
+	}
+	else {
+		std::cerr << "Failed to initialize server\n";
+	}
+
+	while (server.IsRunning()) {
+		Sleep(100);
+	}
+
 
 	return 0;
-}
-
-uint32_t generateRandomByteBuffer(uint32_t size, std::vector<byte>&vOutData)
-{
-	std::random_device rd;
-	std::uniform_int_distribution<uint32_t> dist(0, 0xFFFFFFFFu);
-
-	vOutData.clear();
-	vOutData.resize(size);
-	
-	int offset = 0;
-	uint32_t bits = 0;
-	uint32_t addedElements = 0;
-	for (byte& d : vOutData)
-	{
-		if (offset == 0)
-			bits = dist(rd);
-		d = static_cast<char>(bits & 0xFF);
-		bits >>= 8;
-		if (++offset >= 4)
-			offset = 0;
-
-		addedElements++;
-	}
-	return addedElements;
-}
-
-void TestQueue()
-{
-	std::vector<byte> myRandomData;
-	BlockingQueue<byte> _rcvQueue;
-	for (int i = 0; i < 1024; i++) {
-
-	}
-	enQ()
-
 }
 
 
